@@ -13,6 +13,7 @@
 		0E47962228EB0FCC00D8F669 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E47962028EB0FCC00D8F669 /* Main.storyboard */; };
 		0E47962428EB0FCE00D8F669 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E47962328EB0FCE00D8F669 /* Assets.xcassets */; };
 		0E47962728EB0FCE00D8F669 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E47962528EB0FCE00D8F669 /* LaunchScreen.storyboard */; };
+		0E7FD57428EB3C6C006359F9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7FD57328EB3C6C006359F9 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		0E47962328EB0FCE00D8F669 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E47962628EB0FCE00D8F669 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0E47962828EB0FCE00D8F669 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E7FD57328EB3C6C006359F9 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,13 +60,30 @@
 			children = (
 				0E47961A28EB0FCC00D8F669 /* AppDelegate.swift */,
 				0E47961C28EB0FCC00D8F669 /* SceneDelegate.swift */,
-				0E47961E28EB0FCC00D8F669 /* ViewController.swift */,
+				0E7FD57628EB3D6E006359F9 /* Login */,
+				0E7FD57528EB3D45006359F9 /* Home */,
 				0E47962028EB0FCC00D8F669 /* Main.storyboard */,
 				0E47962328EB0FCE00D8F669 /* Assets.xcassets */,
 				0E47962528EB0FCE00D8F669 /* LaunchScreen.storyboard */,
 				0E47962828EB0FCE00D8F669 /* Info.plist */,
 			);
 			path = "Bonfire 1.0";
+			sourceTree = "<group>";
+		};
+		0E7FD57528EB3D45006359F9 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				0E47961E28EB0FCC00D8F669 /* ViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		0E7FD57628EB3D6E006359F9 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0E7FD57328EB3C6C006359F9 /* LoginView.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +159,7 @@
 			files = (
 				0E47961F28EB0FCC00D8F669 /* ViewController.swift in Sources */,
 				0E47961B28EB0FCC00D8F669 /* AppDelegate.swift in Sources */,
+				0E7FD57428EB3C6C006359F9 /* LoginView.swift in Sources */,
 				0E47961D28EB0FCC00D8F669 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
