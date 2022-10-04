@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E0FC3B428EC73730020C21C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FC3B328EC73730020C21C /* Extension.swift */; };
+		0E0FC3B628EC9D410020C21C /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FC3B528EC9D410020C21C /* HomeModel.swift */; };
 		0E47961B28EB0FCC00D8F669 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E47961A28EB0FCC00D8F669 /* AppDelegate.swift */; };
 		0E47961D28EB0FCC00D8F669 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E47961C28EB0FCC00D8F669 /* SceneDelegate.swift */; };
 		0E47961F28EB0FCC00D8F669 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E47961E28EB0FCC00D8F669 /* ViewController.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E0FC3B328EC73730020C21C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		0E0FC3B528EC9D410020C21C /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		0E47961728EB0FCC00D8F669 /* Bonfire 1.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bonfire 1.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E47961A28EB0FCC00D8F669 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E47961C28EB0FCC00D8F669 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +70,7 @@
 				0E47962328EB0FCE00D8F669 /* Assets.xcassets */,
 				0E47962528EB0FCE00D8F669 /* LaunchScreen.storyboard */,
 				0E47962828EB0FCE00D8F669 /* Info.plist */,
+				0E0FC3B328EC73730020C21C /* Extension.swift */,
 			);
 			path = "Bonfire 1.0";
 			sourceTree = "<group>";
@@ -74,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				0E47961E28EB0FCC00D8F669 /* ViewController.swift */,
+				0E0FC3B528EC9D410020C21C /* HomeModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -159,6 +165,8 @@
 			files = (
 				0E47961F28EB0FCC00D8F669 /* ViewController.swift in Sources */,
 				0E47961B28EB0FCC00D8F669 /* AppDelegate.swift in Sources */,
+				0E0FC3B628EC9D410020C21C /* HomeModel.swift in Sources */,
+				0E0FC3B428EC73730020C21C /* Extension.swift in Sources */,
 				0E7FD57428EB3C6C006359F9 /* LoginView.swift in Sources */,
 				0E47961D28EB0FCC00D8F669 /* SceneDelegate.swift in Sources */,
 			);
