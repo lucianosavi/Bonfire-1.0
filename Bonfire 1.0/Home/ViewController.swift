@@ -9,8 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let topView = UIView()
-    
+  
     lazy var topLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -19,13 +18,14 @@ class ViewController: UIViewController {
          return label
     }()
     
-    lazy var aboveTopLabel: UILabel = {
+    lazy var emptyLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = " "
         label.textColor = .systemCyan
         label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 1
+        
         
         return label
     }()
@@ -37,18 +37,32 @@ class ViewController: UIViewController {
         label.textColor = .systemCyan
         label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 1
+        label.layer.borderColor = UIColor(red: 110/255, green: 110/255, blue: 110/255, alpha: 1).cgColor
+        label.layer.borderWidth = 1
+        label.layer.cornerRadius = 5
         return label
     }()
     
     
     lazy var topStackView: UIStackView = {
         
-        let stackView = UIStackView(arrangedSubviews: [topLabel,aboveTopLabel,thirdLabel])
+        let stackView = UIStackView(arrangedSubviews: [topLabel,emptyLabel,thirdLabel])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.distribution = .fillProportionally
-        stackView.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 110/255, alpha: 1)
-        stackView.layer.opacity = 0.5
+        stackView.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 25/255, alpha: 1)
+        stackView.layer.cornerRadius = 5
+        return stackView
+    }()
+    
+    lazy var bottomStackView: UIStackView = {
+        
+        let stackView = UIStackView(arrangedSubviews: [])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.distribution = .fillProportionally
+        stackView.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 25/255, alpha: 1)
+        stackView.layer.cornerRadius = 5
         return stackView
     }()
     
@@ -65,13 +79,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        view.addSubview(topView)
+        view.backgroundColor =  UIColor(red: 110/255, green: 110/255, blue: 110/255, alpha: 1)
         view.addSubview(bonfireImage)
         view.addSubview(topStackView)
-        topView.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 50/255, alpha: 1)
+        view.addSubview(bottomStackView)
+        
         setupConstrants()
-        view.backgroundColor = .systemGray
+        
          
     }
     
@@ -88,10 +102,10 @@ class ViewController: UIViewController {
             bonfireImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bonfireImage.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -250),
             
-            topView.topAnchor.constraint(equalTo: bonfireImage.bottomAnchor,constant: 5),
-            topView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            topView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            topView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            bottomStackView.topAnchor.constraint(equalTo: bonfireImage.bottomAnchor),
+            bottomStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottomStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottomStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -25)
             
         ])
         
