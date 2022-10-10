@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-  
+   private let networkManager = NetworkManager()
     lazy var topLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -83,7 +83,7 @@ class ViewController: UIViewController {
         view.addSubview(bonfireImage)
         view.addSubview(topStackView)
         view.addSubview(bottomStackView)
-        
+        networkManager.getJson(movieType: "musics", completionHandler: <#T##(Decodable & Encodable) -> Void#>)
         setupConstrants()
         
          

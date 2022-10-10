@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0E0FC3B428EC73730020C21C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FC3B328EC73730020C21C /* Extension.swift */; };
 		0E0FC3B628EC9D410020C21C /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FC3B528EC9D410020C21C /* HomeModel.swift */; };
+		0E4674EF28F48EFB000F4BD7 /* NetworkManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4674EE28F48EFB000F4BD7 /* NetworkManage.swift */; };
+		0E4674F128F49480000F4BD7 /* AuthManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4674F028F49480000F4BD7 /* AuthManger.swift */; };
 		0E47961B28EB0FCC00D8F669 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E47961A28EB0FCC00D8F669 /* AppDelegate.swift */; };
 		0E47961D28EB0FCC00D8F669 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E47961C28EB0FCC00D8F669 /* SceneDelegate.swift */; };
 		0E47961F28EB0FCC00D8F669 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E47961E28EB0FCC00D8F669 /* ViewController.swift */; };
@@ -21,6 +23,8 @@
 /* Begin PBXFileReference section */
 		0E0FC3B328EC73730020C21C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		0E0FC3B528EC9D410020C21C /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		0E4674EE28F48EFB000F4BD7 /* NetworkManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManage.swift; sourceTree = "<group>"; };
+		0E4674F028F49480000F4BD7 /* AuthManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManger.swift; sourceTree = "<group>"; };
 		0E47961728EB0FCC00D8F669 /* Bonfire 1.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bonfire 1.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E47961A28EB0FCC00D8F669 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E47961C28EB0FCC00D8F669 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,9 +47,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E4674ED28F48EAD000F4BD7 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				0E4674EE28F48EFB000F4BD7 /* NetworkManage.swift */,
+				0E4674F028F49480000F4BD7 /* AuthManger.swift */,
+			);
+			name = NetworkManager;
+			sourceTree = "<group>";
+		};
 		0E47960E28EB0FCC00D8F669 = {
 			isa = PBXGroup;
 			children = (
+				0E4674ED28F48EAD000F4BD7 /* NetworkManager */,
 				0E47961928EB0FCC00D8F669 /* Bonfire 1.0 */,
 				0E47961828EB0FCC00D8F669 /* Products */,
 			);
@@ -124,6 +138,7 @@
 				TargetAttributes = {
 					0E47961628EB0FCC00D8F669 = {
 						CreatedOnToolsVersion = 14.0.1;
+						LastSwiftMigration = 1400;
 					};
 				};
 			};
@@ -166,9 +181,11 @@
 				0E47961F28EB0FCC00D8F669 /* ViewController.swift in Sources */,
 				0E47961B28EB0FCC00D8F669 /* AppDelegate.swift in Sources */,
 				0E0FC3B628EC9D410020C21C /* HomeModel.swift in Sources */,
+				0E4674EF28F48EFB000F4BD7 /* NetworkManage.swift in Sources */,
 				0E0FC3B428EC73730020C21C /* Extension.swift in Sources */,
 				0E7FD57428EB3C6C006359F9 /* LoginView.swift in Sources */,
 				0E47961D28EB0FCC00D8F669 /* SceneDelegate.swift in Sources */,
+				0E4674F128F49480000F4BD7 /* AuthManger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +330,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -330,6 +348,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "luciano.savi-foursys.com.Bonfire-1-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -340,6 +360,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -357,6 +378,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "luciano.savi-foursys.com.Bonfire-1-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
