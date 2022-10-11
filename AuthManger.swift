@@ -23,5 +23,8 @@ import Foundation
             "scopes":scopes
         ]
     }
+enum NetworkError: Error {
+    case invalidUrl
     
+}
 

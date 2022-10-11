@@ -14,41 +14,57 @@ class NetworkManager {
     private let apiKey = "01aa3eae35154a43ba95fa3c14bca894"
     private let scopes = "playlist-read-private"
     
-    func getToken(){
-        guard let signIn = URL(string:" https://accounts.spotify.com/authorize/?client_id=01aa3eae35154a43ba95fa3c14bca894&response_type=token&scope=playlist-read-private&redirect_uri=https://github.com/lucianosavi)") else {
-            print("error on SignInURL")
-            return
+    func getToken() -> URLRequest? {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = Client.authHost
+        components.path = "/authorize"
+        
+        components.queryItems = Client.authParams.map({URLQueryItem(name: $0, value: $1)})
+        guard let url = components.url else{
+            print("error get token")
+            return nil
+            
         }
-    }
-    func getJson<T: Codable> (movieType: String, completionHandler: @escaping (T) -> Void) {
-        
-        
-        guard let url = URL(string: "https://api.spotify.com/v1/search?type=track&query=bad bunny") else {
-            print("error on URL")
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        
-        request.httpMethod = "GET"
-        
-        let task = URLSession.shared.dataTask(with: request) { data, _, error in
-            guard let data = data, error == nil else {
-                print(error?.localizedDescription)
-                return
-            }
-            print(data)
-            do {
-                let result = try JSONDecoder().decode(T.self, from: data)
-                completionHandler(result)
-            } catch {
-                print(error.localizedDescription)
-                
-            }
-        }
-        
-        task.resume()
-        
+        return URLRequest(url: url)
     }
     
-}
+    func createUrlRequest() -> URLRequest? {
+        var component = URLComponents()
+        component.scheme = "https"
+        component.host = Client.apiHost
+        component.path = "/v1/search"
+        
+        component.queryItems = [
+        URLQueryItem(name: "type", value: "track"),
+        URLQueryItem(name: "query", value: "Hollywood Devil")
+        ]
+        guard let url = component.url else {
+            print("error on guard let creatUrlRequest")
+            return nil
+             }
+        var urlRequest = URLRequest(url: url)
+        
+        let token:String = UserDefaults.standard.value(forKey: "Authorization") as! String
+        urlRequest.addValue("Bearer" + token, forHTTPHeaderField: "Authorization")
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        urlRequest.httpMethod = "GET"
+        return urlRequest
+        }
+    func search() async throws -> [String]{
+        guard let urlRequest = createUrlRequest() else {throw  NetworkError.invalidUrl}
+        let (data, _) = try await URLSession.shared.data(for: urlRequest)
+        
+        let decoder = JSONDecoder()
+        let result = try decoder.decode(Result.self, from: data)
+        
+        let items = result.tracks?.items
+        
+        print("Resultado",items)
+        
+        return[]
+    }
+    
+    }
+
