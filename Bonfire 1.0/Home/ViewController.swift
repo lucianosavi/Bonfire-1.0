@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import WebKit
 
 class ViewController: UIViewController {
+    
     
    private let networkManager = NetworkManager()
     lazy var topLabel: UILabel = {
@@ -83,33 +85,80 @@ class ViewController: UIViewController {
         view.addSubview(bonfireImage)
         view.addSubview(topStackView)
         view.addSubview(bottomStackView)
-        networkManager.getJson(movieType: "musics", completionHandler: <#T##(Decodable & Encodable) -> Void#>)
-        setupConstrants()
+        if (UserDefaults.standard.value(forKey: "Authorization") != nil){
+            
+        } else {
+            getTokenFromWebkit()
+        }
+     //   setupConstrants()
         
          
     }
     
-    func setupConstrants () {
-        NSLayoutConstraint.activate([
-            
-            topStackView.topAnchor.constraint(equalTo: view.topAnchor,constant: 65),
-            topStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            topStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            topStackView.bottomAnchor.constraint(equalTo: bonfireImage.topAnchor),
-            
-            bonfireImage.topAnchor.constraint(equalTo: view.topAnchor,constant: 180),
-            bonfireImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bonfireImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bonfireImage.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -250),
-            
-            bottomStackView.topAnchor.constraint(equalTo: bonfireImage.bottomAnchor),
-            bottomStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -25)
-            
-        ])
+    private func getTokenFromWebkit(){
+        guard let urlRequest = NetworkManager.shared.getToken() else {
+            print("error on getTokenFromWebkit")
+            return
+        }
+        let webView = WKWebView()
+        webView.load(urlRequest)
+        webView.navigationDelegate = self
+        view = webView
         
-        
+       
     }
     
+//    func setupConstrants () {
+//        NSLayoutConstraint.activate([
+//
+//            topStackView.topAnchor.constraint(equalTo: view.topAnchor,constant: 65),
+//            topStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            topStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            topStackView.bottomAnchor.constraint(equalTo: bonfireImage.topAnchor),
+//
+//            bonfireImage.topAnchor.constraint(equalTo: view.topAnchor,constant: 180),
+//            bonfireImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            bonfireImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            bonfireImage.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -250),
+//
+//            bottomStackView.topAnchor.constraint(equalTo: bonfireImage.bottomAnchor),
+//            bottomStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            bottomStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            bottomStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -25)
+//
+//        ])
+//
+//
+//    }
+    
+}
+extension ViewController:WKNavigationDelegate{
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        guard let urlString = webView.url?.absoluteString else{
+            print("error on navigationDelegate extension")
+            return
+        }
+        var tokenString = ""
+        print("teste",urlString)
+        if urlString.contains("access_token=") == true {
+            let range = urlString.range(of: "#access_token=")
+            guard let index = range?.upperBound else {
+                print("error on guard let index = range")
+                return
+            }
+            tokenString = String(urlString[index...])
+          
+        }
+        if !tokenString.isEmpty{
+            let range = tokenString.range(of: "&token_type=Bearer")
+            guard let index = range?.lowerBound else {
+                print("error on guard let index = range")
+                return
+            }
+            tokenString = String(tokenString[..<index])
+            UserDefaults.standard.setValue(tokenString, forKey: "Authorization")
+            
+        }
+    }
+   
 }
