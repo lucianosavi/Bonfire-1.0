@@ -10,8 +10,8 @@ import Foundation
 class NetworkManager {
     
     static let shared = NetworkManager()
-   
-    
+    var songNameTest = "Snuff"
+
     func getToken() -> URLRequest? {
         var components = URLComponents()
         components.scheme = "https"
@@ -35,7 +35,7 @@ class NetworkManager {
         
         component.queryItems = [
         URLQueryItem(name: "type", value: "track"),
-        URLQueryItem(name: "query", value: "Hollywood Devil")
+        URLQueryItem(name: "query", value: songNameTest)
         ]
         guard let url = component.url else {
             print("error on guard let creatUrlRequest")
@@ -62,9 +62,10 @@ class NetworkManager {
         
         
         
-        print(data.debugDescription)
-        print(urlRequest)
+        
+        
         let resultString = String(decoding: data, as: UTF8.self)
+        print(resultString)
         let decoder = JSONDecoder()
         //let result = try decoder.decode(Result.self, from: data)
         
@@ -75,7 +76,7 @@ class NetworkManager {
             print(error.localizedDescription)
             
         }
-    
+       
        
        // let items = result.tracks?.items
      
@@ -85,4 +86,10 @@ class NetworkManager {
     
     
     }
+
+   /*erro na resultString vem "error" : {
+"status" : 400,
+"message" : "No search query"
+}
+    */
 

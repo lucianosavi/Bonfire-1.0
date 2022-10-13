@@ -10,8 +10,12 @@ import WebKit
 
 class ViewController: UIViewController {
     
+    static let shared = ViewController()
     
     private let networkManager = NetworkManager()
+    var song = ""
+    
+    
     lazy var topLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -95,6 +99,7 @@ class ViewController: UIViewController {
         if (UserDefaults.standard.value(forKey: "Authorization") != nil){
             
             setupConstrants()
+            song  = "Snuff"
             Task{
                 
                 let search = try await NetworkManager.shared.search()
