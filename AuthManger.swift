@@ -14,7 +14,7 @@ import Foundation
         static let clientSecret = "afe22aa4e0204dc3a651c5c17c3a039a"
         static let redirectUri = "https://github.com/lucianosavi"
         static let responseType = "token"
-        static let scopes = "playlist-read-private"
+        static let scopes = "user-read-private"
         
         static var authParams = [
             "response_type": responseType,

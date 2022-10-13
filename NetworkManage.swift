@@ -10,9 +10,7 @@ import Foundation
 class NetworkManager {
     
     static let shared = NetworkManager()
-    
-    private let apiKey = "01aa3eae35154a43ba95fa3c14bca894"
-    private let scopes = "playlist-read-private"
+   
     
     func getToken() -> URLRequest? {
         var components = URLComponents()
@@ -46,25 +44,37 @@ class NetworkManager {
         var urlRequest = URLRequest(url: url)
         
         let token:String = UserDefaults.standard.value(forKey: "Authorization") as! String
-        urlRequest.addValue("Bearer" + token, forHTTPHeaderField: "Authorization")
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue("Bearer " + token, forHTTPHeaderField: "Authorization")
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         urlRequest.httpMethod = "GET"
+        print("teste user defaults",UserDefaults.standard.value(forKey: "Authorization") ?? "Vazio")
         return urlRequest
         }
     func search() async throws -> [String]{
-        guard let urlRequest = createUrlRequest() else {throw  NetworkError.invalidUrl}
+        guard let urlRequest = createUrlRequest() else {
+
+            throw  NetworkError.invalidUrl
+
+        }
+
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
         
-        let decoder = JSONDecoder()
-        let result = try decoder.decode(Result.self, from: data)
         
+        
+        print(data.debugDescription)
+        print(urlRequest)
+        let resultString = String(decoding: data, as: UTF8.self)
+        print("teste resultString", resultString)
+        let result = try JSONDecoder().decode(Result.self, from: data)
+        print("teste result",result)
         let items = result.tracks?.items
-        
-        print("Resultado",items)
-        
+       
+
         return[]
     }
+   
+    
     
     }
 

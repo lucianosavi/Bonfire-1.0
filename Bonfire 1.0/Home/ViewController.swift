@@ -85,9 +85,12 @@ class ViewController: UIViewController {
         view.addSubview(bonfireImage)
         view.addSubview(topStackView)
         view.addSubview(bottomStackView)
-        
+       // UserDefaults.standard.setValue(nil, forKey: "Authorization")
         if (UserDefaults.standard.value(forKey: "Authorization") != nil){
+            
+            
             Task{
+                print("chegou aqui")
                 let search = try await NetworkManager.shared.search()
             }
         } else {
@@ -161,6 +164,7 @@ extension ViewController:WKNavigationDelegate{
             tokenString = String(tokenString[..<index])
             UserDefaults.standard.setValue(tokenString, forKey: "Authorization")
             webView.removeFromSuperview()
+            print("t",tokenString)
         }
     }
    

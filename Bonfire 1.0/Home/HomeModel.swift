@@ -9,6 +9,8 @@ import Foundation
 
 struct Result:Codable {
     var tracks:Tracks?
+    
+   
 }
 struct Tracks:Codable{
     var items:[Items]?
@@ -16,7 +18,7 @@ struct Tracks:Codable{
 }
 struct Items:Codable{
     
-    var artists:String
+    var artists:String?
     var name:String?
     var id:String?
     var external_urls:[ExternalUrls]?
