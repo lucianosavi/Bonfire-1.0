@@ -10,7 +10,7 @@ import Foundation
 class NetworkManager {
     
     static let shared = NetworkManager()
-    var songNameTest = ""
+    var songNameTest = "Snuff"
 
     func getToken() -> URLRequest? {
         var components = URLComponents()
