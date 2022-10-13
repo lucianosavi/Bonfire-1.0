@@ -11,13 +11,13 @@ import WebKit
 class ViewController: UIViewController {
     
     
-   private let networkManager = NetworkManager()
+    private let networkManager = NetworkManager()
     lazy var topLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Olá Luciano, seja bem vindo."
         label.textColor = .systemCyan
-         return label
+        return label
     }()
     
     lazy var emptyLabel: UILabel = {
@@ -45,6 +45,12 @@ class ViewController: UIViewController {
         return label
     }()
     
+    lazy var songTextField: UITextField = {
+      let textField = UITextField()
+        textField.placeholder = "Digite o nome da musica"
+        textField.textColor = .systemCyan
+       return textField
+    }()
     
     lazy var topStackView: UIStackView = {
         
@@ -59,7 +65,7 @@ class ViewController: UIViewController {
     
     lazy var bottomStackView: UIStackView = {
         
-        let stackView = UIStackView(arrangedSubviews: [])
+        let stackView = UIStackView(arrangedSubviews: [songTextField])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.distribution = .fillProportionally
@@ -85,20 +91,20 @@ class ViewController: UIViewController {
         view.addSubview(bonfireImage)
         view.addSubview(topStackView)
         view.addSubview(bottomStackView)
-       // UserDefaults.standard.setValue(nil, forKey: "Authorization")
+       //  UserDefaults.standard.setValue(nil, forKey: "Authorization")
         if (UserDefaults.standard.value(forKey: "Authorization") != nil){
             
-            
+            setupConstrants()
             Task{
-                print("chegou aqui")
+                
                 let search = try await NetworkManager.shared.search()
             }
         } else {
             getTokenFromWebkit()
         }
-     //   setupConstrants()
         
-         
+        
+        
     }
     
     private func getTokenFromWebkit(){
@@ -111,31 +117,31 @@ class ViewController: UIViewController {
         webView.navigationDelegate = self
         view = webView
         
-       
+        
     }
     
-//    func setupConstrants () {
-//        NSLayoutConstraint.activate([
-//
-//            topStackView.topAnchor.constraint(equalTo: view.topAnchor,constant: 65),
-//            topStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            topStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            topStackView.bottomAnchor.constraint(equalTo: bonfireImage.topAnchor),
-//
-//            bonfireImage.topAnchor.constraint(equalTo: view.topAnchor,constant: 180),
-//            bonfireImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            bonfireImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            bonfireImage.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -250),
-//
-//            bottomStackView.topAnchor.constraint(equalTo: bonfireImage.bottomAnchor),
-//            bottomStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            bottomStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            bottomStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -25)
-//
-//        ])
-//
-//
-//    }
+    func setupConstrants () {
+        NSLayoutConstraint.activate([
+            
+            topStackView.topAnchor.constraint(equalTo: view.topAnchor,constant: 65),
+            topStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            topStackView.bottomAnchor.constraint(equalTo: bonfireImage.topAnchor),
+            
+            bonfireImage.topAnchor.constraint(equalTo: view.topAnchor,constant: 180),
+            bonfireImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bonfireImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bonfireImage.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -250),
+            
+            bottomStackView.topAnchor.constraint(equalTo: bonfireImage.bottomAnchor),
+            bottomStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottomStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottomStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -25)
+            
+        ])
+        
+        
+    }
     
 }
 extension ViewController:WKNavigationDelegate{
@@ -153,7 +159,7 @@ extension ViewController:WKNavigationDelegate{
                 return
             }
             tokenString = String(urlString[index...])
-          
+            
         }
         if !tokenString.isEmpty{
             let range = tokenString.range(of: "&token_type=Bearer")
@@ -167,5 +173,5 @@ extension ViewController:WKNavigationDelegate{
             print("t",tokenString)
         }
     }
-   
+    
 }
