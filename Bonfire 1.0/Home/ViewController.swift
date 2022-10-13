@@ -11,9 +11,10 @@ import WebKit
 class ViewController: UIViewController {
     
     static let shared = ViewController()
-    
     private let networkManager = NetworkManager()
-    var song = ""
+    
+    
+    
     
     
     lazy var topLabel: UILabel = {
@@ -50,10 +51,11 @@ class ViewController: UIViewController {
     }()
     
     lazy var songTextField: UITextField = {
-      let textField = UITextField()
+        let textField = UITextField()
         textField.placeholder = "Digite o nome da musica"
+        
         textField.textColor = .systemCyan
-       return textField
+        return textField
     }()
     
     lazy var topStackView: UIStackView = {
@@ -89,65 +91,48 @@ class ViewController: UIViewController {
     }()
     
     override func viewDidLoad() {
-        
+       
         super.viewDidLoad()
         view.backgroundColor =  UIColor(red: 110/255, green: 110/255, blue: 110/255, alpha: 1)
         view.addSubview(bonfireImage)
         view.addSubview(topStackView)
         view.addSubview(bottomStackView)
-       //  UserDefaults.standard.setValue(nil, forKey: "Authorization")
+        //  UserDefaults.standard.setValue(nil, forKey: "Authorization")
+        setupView()
+        
+    }
+    func setupView(){
         if (UserDefaults.standard.value(forKey: "Authorization") != nil){
-            
             setupConstrants()
-            song  = "Snuff"
-            Task{
+            HomeViewModel.shared.getSong()
+        }else {
+            HomeViewModel.shared.getTokenFromWebkit()
+        }
+        
+        func setupConstrants () {
+            NSLayoutConstraint.activate([
                 
-                let search = try await NetworkManager.shared.search()
-            }
-        } else {
-            getTokenFromWebkit()
+                topStackView.topAnchor.constraint(equalTo: view.topAnchor,constant: 65),
+                topStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                topStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                topStackView.bottomAnchor.constraint(equalTo: bonfireImage.topAnchor),
+                
+                bonfireImage.topAnchor.constraint(equalTo: view.topAnchor,constant: 180),
+                bonfireImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                bonfireImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                bonfireImage.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -250),
+                
+                bottomStackView.topAnchor.constraint(equalTo: bonfireImage.bottomAnchor),
+                bottomStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                bottomStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                bottomStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -25)
+                
+            ])
+            
+            
         }
         
-        
-        
     }
-    
-    private func getTokenFromWebkit(){
-        guard let urlRequest = NetworkManager.shared.getToken() else {
-            print("error on getTokenFromWebkit")
-            return
-        }
-        let webView = WKWebView()
-        webView.load(urlRequest)
-        webView.navigationDelegate = self
-        view = webView
-        
-        
-    }
-    
-    func setupConstrants () {
-        NSLayoutConstraint.activate([
-            
-            topStackView.topAnchor.constraint(equalTo: view.topAnchor,constant: 65),
-            topStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            topStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            topStackView.bottomAnchor.constraint(equalTo: bonfireImage.topAnchor),
-            
-            bonfireImage.topAnchor.constraint(equalTo: view.topAnchor,constant: 180),
-            bonfireImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bonfireImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bonfireImage.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -250),
-            
-            bottomStackView.topAnchor.constraint(equalTo: bonfireImage.bottomAnchor),
-            bottomStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -25)
-            
-        ])
-        
-        
-    }
-    
 }
 extension ViewController:WKNavigationDelegate{
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
