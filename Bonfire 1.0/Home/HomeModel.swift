@@ -18,12 +18,12 @@ struct Tracks:Codable{
 }
 struct Items:Codable{
     
-    var artists:String?
+    
     var name:String?
     var id:String?
-    var external_urls:[ExternalUrls]?
+    var external_urls:ExternalUrls?
 }
 struct ExternalUrls:Codable{
-    var spotify:URL?
+    var spotify:String?
     
 }

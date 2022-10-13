@@ -46,9 +46,9 @@ class NetworkManager {
         let token:String = UserDefaults.standard.value(forKey: "Authorization") as! String
         urlRequest.setValue("Bearer " + token, forHTTPHeaderField: "Authorization")
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+        print(UserDefaults.standard.value(forKey: "Authorization"))
         urlRequest.httpMethod = "GET"
-        print("teste user defaults",UserDefaults.standard.value(forKey: "Authorization") ?? "Vazio")
+       
         return urlRequest
         }
     func search() async throws -> [String]{
@@ -65,12 +65,20 @@ class NetworkManager {
         print(data.debugDescription)
         print(urlRequest)
         let resultString = String(decoding: data, as: UTF8.self)
-        print("teste resultString", resultString)
-        let result = try JSONDecoder().decode(Result.self, from: data)
-        print("teste result",result)
-        let items = result.tracks?.items
+        let decoder = JSONDecoder()
+        //let result = try decoder.decode(Result.self, from: data)
+        
+        do {
+            let result = try decoder.decode(Result.self, from: data)
+            print(result)
+        } catch {
+            print(error.localizedDescription)
+            
+        }
+    
        
-
+       // let items = result.tracks?.items
+     
         return[]
     }
    
